@@ -15,8 +15,8 @@ namespace Catalog.Application.Handlers.Queries
 	public class GetAllProductsByNameQueryHandler : IRequestHandler<GetAllProductsByNameQuery, IList<ProductResponseDto>>
 	{
 		private readonly IProductRepository _repository;
-		private readonly Mapper _mapper;
-		public GetAllProductsByNameQueryHandler(IProductRepository repository, Mapper mapper)
+		private readonly IMapper _mapper;
+		public GetAllProductsByNameQueryHandler(IProductRepository repository, IMapper mapper)
 		{
 			_repository = repository;
 			_mapper = mapper;

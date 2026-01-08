@@ -15,8 +15,8 @@ namespace Catalog.Application.Handlers.Commands
 	public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, ProductResponseDto>
 	{
 		private readonly IProductRepository _repository;
-		private readonly Mapper _mapper;
-		public CreateProductCommandHandler(IProductRepository repository, Mapper mapper)
+		private readonly IMapper _mapper;
+		public CreateProductCommandHandler(IProductRepository repository, IMapper mapper)
 		{
 			_mapper = mapper;
 			_repository = repository;

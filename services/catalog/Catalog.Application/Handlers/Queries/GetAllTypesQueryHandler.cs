@@ -14,9 +14,9 @@ namespace Catalog.Application.Handlers.Queries
 {
 	public class GetAllTypesQueryHandler : IRequestHandler<GetAllTypesQuery, IList<TypeResponseDto>>
 	{
-		private readonly Mapper _mapper;
+		private readonly IMapper _mapper;
 		private readonly ITypeRepository _repository;
-		public GetAllTypesQueryHandler(Mapper mapper, ITypeRepository repository)
+		public GetAllTypesQueryHandler(IMapper mapper, ITypeRepository repository)
 		{
 			_mapper = mapper;
 			_repository = repository;
