@@ -1,10 +1,35 @@
-var builder = WebApplication.CreateBuilder(args);
+using Catalog.Application.Mappers;
+using Catalog.Core.Repositories;
+using Catalog.Infrastructure.Data.Contexts;
+using Catalog.Infrastructure.Repositories;
+using System.Reflection;
 
-// Add services to the container.
+
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+
+//Configure autoMapper 
+builder.Services.AddAutoMapper(typeof(ProductMappingProfile).Assembly);
+
+//configure MediatR
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
+
+builder.Services.AddScoped<ICatalogContext, CatalogContext>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IBrandRepository, ProductRepository>();
+builder.Services.AddScoped<ITypeRepository, ProductRepository>();
+
+builder.Services.AddApiVersioning(options =>
+{
+    options.ReportApiVersions=true;
+    options.AssumeDefaultVersionWhenUnspecified=true;
+    options.DefaultApiVersion = new Asp.Versioning.ApiVersion(1, 0);
+});
+
 builder.Services.AddOpenApi();
+//configure swagger metadata
 builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
